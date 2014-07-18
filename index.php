@@ -24,6 +24,7 @@
  			<th>Reservation made at</th>
  			<th>Seated</th>
  			<th>DELETE</th>
+ 			<th>Edit</th>
  		</thead>
  		<?php 
  			foreach ($reservations as $reservation) 
@@ -36,6 +37,7 @@
  					<td>{$reservation['created_at']}</td>
  					<td>{$reservation['seated']}</td>
  					<td><a href='process.php?action=delete&id={$reservation['id']}'>DELETE THIS RESERVATION</a></td>
+ 					<td><a href='process.php?action=edit&id={$reservation['id']}'>EDIT</a></td>
  				</tr>";
  			}
  		 ?>

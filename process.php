@@ -15,6 +15,15 @@
 	{
 		delete_reservation($_GET['id']);
 	}
+	elseif(isset($_GET['action']) && $_GET['action'] == 'edit')
+	{
+		header("location: edit.php?id={$_GET['id']}");
+	}
+	elseif(isset($_GET['action']) && $_GET['action'] == 'update')
+	{
+		update_reservation($_POST, $_GET['id']);
+	}
+
 
 	function add_reservation($post)
 	{
@@ -32,6 +41,21 @@
 	{
 		$query = "DELETE FROM reservations WHERE id = {$id}";
 		run_mysql_query($query);
+		header('location: index.php');
+		die();
+	}
+
+	function update_reservation($post, $id)
+	{
+		$query = "UPDATE reservations SET 
+		number_of_guests = '{$post['num_of_guests']}',
+		contact = '{$post['contact']}',
+		phone_number = '{$post['phone_number']}',
+		seated = {$post['seated']},
+		updated_at = NOW()
+		WHERE id = {$id}";
+		run_mysql_query($query);
+		$_SESSION['success'] = "Reservation successfully updated!";
 		header('location: index.php');
 		die();
 	}
